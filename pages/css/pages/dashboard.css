@@ -1,0 +1,312 @@
+/* ==========================================================================
+   DASHBOARD PAGE - Estilos específicos
+   ========================================================================== */
+
+/* ===== PAGE HEADER ===== */
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-8);
+  padding-bottom: var(--spacing-6);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.page-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+  margin: var(--spacing-2) 0 0 0;
+}
+
+.page-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.page-date {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: var(--color-gray-100);
+  border-radius: var(--border-radius-base);
+}
+
+/* ===== STATS SECTION ===== */
+
+.stats-section {
+  margin-bottom: var(--spacing-8);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-6);
+}
+
+.stats-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--color-primary);
+  transition: all var(--transition-base);
+  animation: fadeInUp 0.4s ease-out;
+}
+
+.stats-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.stats-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.stats-card:nth-child(2) {
+  animation-delay: 0.2s;
+  border-left-color: var(--color-success);
+}
+
+.stats-card:nth-child(3) {
+  animation-delay: 0.3s;
+  border-left-color: var(--color-warning);
+}
+
+.stats-card:nth-child(4) {
+  animation-delay: 0.4s;
+  border-left-color: #7c3aed;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats-card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stats-card-info {
+  flex: 1;
+}
+
+.stats-card-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-600);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.stats-card-value {
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  line-height: 1;
+  margin: 0;
+}
+
+.stats-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--border-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ===== QUICK ACTIONS SECTION ===== */
+
+.quick-actions-section {
+  margin-bottom: var(--spacing-8);
+}
+
+.section-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-6);
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-6);
+}
+
+.quick-action-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  text-decoration: none;
+  display: block;
+  border: 2px solid transparent;
+}
+
+.quick-action-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--color-primary);
+}
+
+.quick-action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-4);
+}
+
+.quick-action-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.quick-action-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ===== SYSTEM INFO SECTION ===== */
+
+.system-info-section {
+  margin-bottom: var(--spacing-8);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .page-title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .page-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .stats-card-value {
+    font-size: 2rem;
+  }
+
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .section-title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .stats-card {
+    padding: var(--spacing-4);
+  }
+
+  .stats-card-value {
+    font-size: 1.75rem;
+  }
+
+  .stats-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* ===== ANIMAÇÕES ADICIONAIS ===== */
+
+.stats-card-value {
+  animation: countUp 0.6s ease-out;
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===== EMPTY STATE (quando não há dados) ===== */
+
+.empty-dashboard {
+  text-align: center;
+  padding: var(--spacing-16) var(--spacing-4);
+}
+
+.empty-dashboard-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--spacing-6);
+  opacity: 0.3;
+}
+
+.empty-dashboard-title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-3);
+}
+
+.empty-dashboard-text {
+  font-size: var(--font-size-base);
+  color: var(--color-gray-600);
+  margin-bottom: var(--spacing-6);
+}

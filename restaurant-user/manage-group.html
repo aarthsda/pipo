@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciar Grupo - Sistema de Restaurante</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f7fa;
+      min-height: 100vh;
+      line-height: 1.6;
+      color: #2c3e50;
+    }
+
+    .header {
+      background: white;
+      border-bottom: 2px solid #e2e8f0;
+      padding: 20px 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a365d;
+    }
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .back-button:hover {
+      background: #e2e8f0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .page-header {
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-header-content {
+      flex: 1;
+    }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1a365d;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 15px;
+      color: #64748b;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: #1351b4;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #0d3f8f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(19,81,180,0.3);
+    }
+
+    .btn-danger {
+      background: #dc2626;
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #b91c1c;
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .group-card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      border: 2px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f1f5f9;
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a365d;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      background: #e0e7ff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1351b4;
+    }
+
+    .members-count {
+      font-size: 14px;
+      color: #64748b;
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .info-banner {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .info-icon {
+      flex-shrink: 0;
+      color: #0284c7;
+      margin-top: 2px;
+    }
+
+    .info-content {
+      flex: 1;
+    }
+
+    .info-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #075985;
+      margin-bottom: 4px;
+    }
+
+    .info-text {
+      font-size: 13px;
+      color: #0c4a6e;
+      line-height: 1.6;
+    }
+
+    .success-alert {
+      display: none;
+      padding: 16px 20px;
+      background: #d1fae5;
+      border: 2px solid #6ee7b7;
+      border-radius: 8px;
+      color: #065f46;
+      margin-bottom: 24px;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    .success-alert.show {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .alert-icon {
+      flex-shrink: 0;
+    }
+
+    .alert-content {
+      flex: 1;
+    }
+
+    .alert-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .alert-text {
+      font-size: 14px;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .table-container {
+      overflow-x: auto;
+    }
+
+    .members-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .members-table thead {
+      background: #f8fafc;
+    }
+
+    .members-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .members-table td {
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .members-table tbody tr:hover {
+      background: #f8fafc;
+    }
+
+    .member-name {
+      font-weight: 600;
+      color: #1a365d;
+    }
+
+    .member-role {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .role-owner {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .role-member {
+      background: #e0e7ff;
+      color: #1351b4;
+    }
+
+    .action-button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-remove {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .btn-remove:hover {
+      background: #fecaca;
+    }
+
+    .btn-remove:disabled {
+      background: #f1f5f9;
+      color: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .empty-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: #f1f5f9;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #94a3b8;
+    }
+
+    .empty-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    .empty-text {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 24px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+
+    .modal-header {
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a365d;
+      margin-bottom: 8px;
+    }
+
+    .modal-subtitle {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #2c3e50;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #1351b4;
+      box-shadow: 0 0 0 3px rgba(19, 81, 180, 0.1);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .group-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 2px solid #f1f5f9;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 24px 16px;
+      }
+
+      .page-header {
+        flex-direction: column;
+      }
+
+      .group-card {
+        padding: 20px;
+      }
+
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .page-title {
+        font-size: 24px;
+      }
+
+      .table-container {
+        margin: 0 -20px;
+        padding: 0 20px;
+      }
+
+      .members-table th,
+      .members-table td {
+        padding: 12px 8px;
+        font-size: 12px;
+      }
+
+      .modal-content {
+        padding: 24px;
+      }
+
+      .group-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-content">
+      <h1 class="header-title">Sistema de Restaurante Institucional</h1>
+      <a href="user-dashboard.html" class="back-button">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="12 19 5 12 12 5"/>
+        </svg>
+        Voltar
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-header">
+      <div class="page-header-content">
+        <h2 class="page-title">Gerenciar Grupo</h2>
+        <p class="page-subtitle">Administre os membros do seu grupo de reservas</p>
+      </div>
+      <button class="btn btn-primary" onclick="openInviteModal()">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+          <line x1="20" y1="8" x2="20" y2="14"/>
+          <line x1="23" y1="11" x2="17" y2="11"/>
+        </svg>
+        Convidar Usuário
+      </button>
+    </div>
+
+    <div id="successAlert" class="success-alert">
+      <div class="alert-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <div class="alert-content">
+        <div class="alert-title" id="successTitle">Operação realizada</div>
+        <div class="alert-text" id="successText">A ação foi concluída com sucesso.</div>
+      </div>
+    </div>
+
+    <div class="info-banner">
+      <div class="info-icon">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="16" x2="12" y2="12"/>
+          <line x1="12" y1="8" x2="12.01" y2="8"/>
+        </svg>
+      </div>
+      <div class="info-content">
+        <div class="info-title">Informação importante</div>
+        <div class="info-text">
+          Apenas o proprietário do grupo pode convidar novos membros ou remover participantes. Membros do grupo podem fazer reservas conjuntas.
+        </div>
+      </div>
+    </div>
+
+    <div class="group-card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="card-icon">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          Membros do Grupo
+        </div>
+        <span class="members-count" id="membersCount">0 membros</span>
+      </div>
+
+      <div id="membersContent">
+        <!-- Conteúdo será inserido via JavaScript -->
+      </div>
+
+      <div class="group-actions">
+        <button class="btn btn-danger" onclick="openLeaveModal()" id="leaveButton">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Sair do Grupo
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal de Convite -->
+  <div id="inviteModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Convidar Usuário</h3>
+        <p class="modal-subtitle">Adicione um novo membro ao seu grupo</p>
+      </div>
+      <form id="inviteForm">
+        <div class="form-group">
+          <label class="form-label" for="inviteEmail">E-mail do usuário</label>
+          <input 
+            type="email" 
+            id="inviteEmail" 
+            class="form-input" 
+            placeholder="usuario@instituicao.br"
+            required
+          >
+        </div>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-primary" style="flex: 1;">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 2L11 13"/>
+              <path d="M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            Enviar Convite
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="closeInviteModal()" style="flex: 1;">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de Remoção -->
+  <div id="removeModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Remover Membro</h3>
+        <p class="modal-subtitle">Tem certeza que deseja remover este usuário do grupo?</p>
+      </div>
+      <div style="background: #fef3c7; padding: 12px; border-radius: 6px; margin: 16px 0;">
+        <p style="font-size: 13px; color: #92400e; line-height: 1.6;">
+          <strong>Atenção:</strong> Esta ação não pode ser desfeita. O usuário perderá acesso às reservas do grupo.
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-danger" onclick="confirmRemove()" style="flex: 1;">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          Sim, Remover
+        </button>
+        <button class="btn btn-secondary" onclick="closeRemoveModal()" style="flex: 1;">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Sair do Grupo -->
+  <div id="leaveModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Sair do Grupo</h3>
+        <p class="modal-subtitle">Tem certeza que deseja sair deste grupo?</p>
+      </div>
+      <div style="background: #fef3c7; padding: 12px; border-radius: 6px; margin: 16px 0;">
+        <p style="font-size: 13px; color: #92400e; line-height: 1.6;">
+          <strong>Atenção:</strong> Você perderá acesso às reservas compartilhadas do grupo. Será necessário criar um novo grupo ou receber um novo convite.
+        </p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-danger" onclick="confirmLeave()" style="flex: 1;">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          Sim, Sair do Grupo
+        </button>
+        <button class="btn btn-secondary" onclick="closeLeaveModal()" style="flex: 1;">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Dados simulados do grupo
+    const groupData = {
+      isOwner: true,
+      members: [
+        {
+          id: 1,
+          name: 'João da Silva',
+          email: 'joao.silva@instituicao.br',
+          role: 'owner'
+        },
+        {
+          id: 2,
+          name: 'Maria Santos',
+          email: 'maria.santos@instituicao.br',
+          role: 'member'
+        },
+        {
+          id: 3,
+          name: 'Pedro Oliveira',
+          email: 'pedro.oliveira@instituicao.br',
+          role: 'member'
+        }
+      ]
+    };
+
+    let currentMemberId = null;
+
+    // Renderizar tabela de membros
+    function renderMembers() {
+      const content = document.getElementById('membersContent');
+      const count = document.getElementById('membersCount');
+
+      if (groupData.members.length === 0) {
+        content.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">
+              <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="empty-title">Nenhum membro no grupo</h3>
+            <p class="empty-text">Comece convidando usuários para fazer parte do seu grupo de reservas.</p>
+            <button class="btn btn-primary" onclick="openInviteModal()">Convidar Usuário</button>
+          </div>
+        `;
+        count.textContent = '0 membros';
+        return;
+      }
+
+      count.textContent = `${groupData.members.length} ${groupData.members.length === 1 ? 'membro' : 'membros'}`;
+
+      const tableHTML = `
+        <div class="table-container">
+          <table class="members-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Função</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${groupData.members.map(member => `
+                <tr>
+                  <td class="member-name">${member.name}</td>
+                  <td>${member.email}</td>
+                  <td>
+                    <span class="member-role ${member.role === 'owner' ? 'role-owner' : 'role-member'}">
+                      ${member.role === 'owner' ? 'Proprietário' : 'Membro'}
+                    </span>
+                  </td>
+                  <td>
+                    <button 
+                      class="action-button btn-remove" 
+                      onclick="openRemoveModal(${member.id})"
+                      ${!groupData.isOwner || member.role === 'owner' ? 'disabled' : ''}
+                      title="${!groupData.isOwner ? 'Apenas o proprietário pode remover membros' : member.role === 'owner' ? 'Não é possível remover o proprietário' : 'Remover membro'}"
+                    >
+                      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="3 6 5 6 21 6"/>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                      </svg>
+                      Remover
+                    </button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      content.innerHTML = tableHTML;
+    }
+
+    // Funções dos modais
+    function openInviteModal() {
+      if (!groupData.isOwner) {
+        showAlert('Permissão negada', 'Apenas o proprietário do grupo pode convidar novos membros.');
+        return;
+      }
+      document.getElementById('inviteModal').classList.add('show');
+    }
+
+    function closeInviteModal() {
+      document.getElementById('inviteModal').classList.remove('show');
+      document.getElementById('inviteForm').reset();
+    }
+
+    function openRemoveModal(id) {
+      currentMemberId = id;
+      document.getElementById('removeModal').classList.add('show');
+    }
+
+    function closeRemoveModal() {
+      document.getElementById('removeModal').classList.remove('show');
+      currentMemberId = null;
+    }
+
+    function openLeaveModal() {
+      document.getElementById('leaveModal').classList.add('show');
+    }
+
+    function closeLeaveModal() {
+      document.getElementById('leaveModal').classList.remove('show');
+    }
+
+    // Confirmar convite
+    document.getElementById('inviteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = document.getElementById('inviteEmail').value;
+      
+      // Simular adição de membro
+      const newMember = {
+        id: groupData.members.length + 1,
+        name: email.split('@')[0].replace('.', ' '),
+        email: email,
+        role: 'member'
+      };
+      
+      groupData.members.push(newMember);
+      renderMembers();
+      closeInviteModal();
+      showAlert('Convite enviado', `Um convite foi enviado para ${email}.`);
+    });
+
+    // Confirmar remoção
+    function confirmRemove() {
+      if (currentMemberId) {
+        const index = groupData.members.findIndex(m => m.id === currentMemberId);
+        if (index > -1) {
+          const memberName = groupData.members[index].name;
+          groupData.members.splice(index, 1);
+          renderMembers();
+          showAlert('Membro removido', `${memberName} foi removido do grupo com sucesso.`);
+        }
+      }
+      closeRemoveModal();
+    }
+
+    // Confirmar saída do grupo
+    function confirmLeave() {
+      showAlert('Você saiu do grupo', 'Você foi removido do grupo com sucesso.');
+      closeLeaveModal();
+      setTimeout(() => {
+        window.location.href = 'user-dashboard.html';
+      }, 2000);
+    }
+
+    // Mostrar alerta de sucesso
+    function showAlert(title, text) {
+      const alert = document.getElementById('successAlert');
+      document.getElementById('successTitle').textContent = title;
+      document.getElementById('successText').textContent = text;
+      alert.classList.add('show');
+      
+      setTimeout(() => {
+        alert.classList.remove('show');
+      }, 5000);
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Fechar modais ao clicar fora
+    document.querySelectorAll('.modal').forEach(modal => {
+      modal.addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('show');
+        }
+      });
+    });
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', function() {
+      renderMembers();
+      
+      // Desabilitar botão de sair se for proprietário
+      if (groupData.isOwner) {
+        const leaveButton = document.getElementById('leaveButton');
+        leaveButton.disabled = true;
+        leaveButton.title = 'O proprietário não pode sair do grupo';
+        leaveButton.style.opacity = '0.5';
+        leaveButton.style.cursor = 'not-allowed';
+      }
+    });
+  </script>
+</body>
+</html>

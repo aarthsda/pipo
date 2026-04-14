@@ -1,0 +1,391 @@
+/* ==========================================================================
+   DISHES PAGE - Estilos da página de pratos
+   ========================================================================== */
+
+/* ===== FILTERS SECTION ===== */
+
+.filters-section {
+  margin-bottom: var(--spacing-6);
+}
+
+/* ===== DISHES GRID ===== */
+
+.dishes-section {
+  position: relative;
+  min-height: 400px;
+}
+
+.dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+}
+
+/* ===== DISH CARD ===== */
+
+.dish-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base);
+  animation: fadeInUp 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Imagem do Prato */
+.dish-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--color-gray-200);
+}
+
+.dish-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-base);
+}
+
+.dish-card:hover .dish-card-image img {
+  transform: scale(1.05);
+}
+
+/* Conteúdo do Card */
+.dish-card-content {
+  padding: var(--spacing-5);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dish-card-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-2);
+  line-height: 1.3;
+}
+
+.dish-card-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-4);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* Info do Prato */
+.dish-card-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) 0;
+  border-top: 1px solid var(--color-gray-200);
+  margin-bottom: var(--spacing-4);
+}
+
+.dish-card-quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-700);
+  font-weight: var(--font-weight-semibold);
+}
+
+.dish-card-quantity svg {
+  color: var(--color-primary);
+}
+
+/* Ações do Card */
+.dish-card-actions {
+  display: flex;
+  gap: var(--spacing-2);
+  padding: 0 var(--spacing-5) var(--spacing-5);
+}
+
+.btn-icon {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3);
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-icon:hover {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+.btn-icon-danger {
+  background-color: var(--color-error-light);
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+.btn-icon-danger:hover {
+  background-color: var(--color-error);
+  color: var(--color-white);
+  border-color: var(--color-error);
+}
+
+/* ===== MODAL ESPECÍFICO ===== */
+
+#dishModal {
+  max-width: 600px;
+}
+
+/* Upload de Imagem */
+.image-upload-container {
+  position: relative;
+}
+
+.image-upload-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.image-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  border: 2px dashed var(--color-gray-300);
+  border-radius: var(--border-radius-lg);
+  background-color: var(--color-gray-50);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+}
+
+.image-upload-label:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-lighter);
+}
+
+.image-upload-label svg {
+  color: var(--color-gray-400);
+  margin-bottom: var(--spacing-3);
+}
+
+.image-upload-text {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-700);
+  margin-bottom: var(--spacing-2);
+  display: block;
+}
+
+.image-upload-hint {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  display: block;
+}
+
+/* Preview da Imagem */
+.image-preview {
+  position: relative;
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  margin-top: var(--spacing-3);
+}
+
+.image-preview img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-remove-btn {
+  position: absolute;
+  top: var(--spacing-3);
+  right: var(--spacing-3);
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-error);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-full);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-md);
+}
+
+.image-remove-btn:hover {
+  background-color: #f02f0f;
+  transform: scale(1.1);
+}
+
+/* Contador de caracteres */
+.form-help {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#charCount {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 1024px) {
+  .dishes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--spacing-4);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .page-header-actions {
+    width: 100%;
+  }
+
+  .page-header-actions .btn {
+    width: 100%;
+  }
+
+  .dishes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dish-card-image {
+    height: 180px;
+  }
+
+  #dishModal {
+    margin: var(--spacing-2);
+  }
+
+  .image-preview img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dish-card-actions {
+    flex-direction: column;
+  }
+
+  .btn-icon {
+    width: 100%;
+  }
+
+  .image-upload-label {
+    padding: var(--spacing-6);
+  }
+
+  .image-upload-label svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ===== ANIMAÇÕES ADICIONAIS ===== */
+
+.dish-card.removing {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* ===== LOADING STATE ===== */
+
+.dishes-grid.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Skeleton Loading (opcional) */
+.dish-card-skeleton {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-200) 25%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 200px;
+}
+
+.skeleton-text {
+  height: 16px;
+  margin: var(--spacing-3);
+  border-radius: var(--border-radius-sm);
+}
+
+.skeleton-text-short {
+  width: 60%;
+}

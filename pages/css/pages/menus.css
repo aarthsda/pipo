@@ -1,0 +1,459 @@
+/* ==========================================================================
+   MENUS PAGE - Estilos da página de cardápios
+   ========================================================================== */
+
+/* ===== FILTERS SECTION ===== */
+
+.filters-section {
+  margin-bottom: var(--spacing-6);
+}
+
+/* ===== MENUS LIST ===== */
+
+.menus-section {
+  position: relative;
+  min-height: 400px;
+}
+
+.menus-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* ===== MENU CARD ===== */
+
+.menu-card {
+  background-color: var(--color-white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-6);
+  transition: all var(--transition-base);
+  animation: fadeInUp 0.4s ease-out;
+  border-left: 4px solid var(--color-success);
+}
+
+.menu-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header do Card */
+.menu-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 2px solid var(--color-gray-200);
+}
+
+.menu-card-info {
+  flex: 1;
+}
+
+.menu-card-name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-gray-900);
+  margin-bottom: var(--spacing-2);
+  line-height: 1.2;
+}
+
+.menu-card-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+}
+
+.menu-card-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.menu-card-meta-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-gray-500);
+}
+
+/* Ações do Card */
+.menu-card-actions {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+.menu-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  border: none;
+  white-space: nowrap;
+}
+
+.menu-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.menu-btn-edit {
+  background-color: var(--color-warning);
+  color: var(--color-gray-900);
+}
+
+.menu-btn-edit:hover {
+  background-color: #ffd934;
+}
+
+.menu-btn-delete {
+  background-color: var(--color-error);
+  color: var(--color-white);
+}
+
+.menu-btn-delete:hover {
+  background-color: #f02f0f;
+}
+
+/* Dishes Grid do Card */
+.menu-dishes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+}
+
+.menu-dish-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  background-color: var(--color-gray-50);
+  border-radius: var(--border-radius-base);
+  border: 1px solid var(--color-gray-200);
+  transition: all var(--transition-base);
+}
+
+.menu-dish-item:hover {
+  background-color: var(--color-gray-100);
+  border-color: var(--color-gray-300);
+}
+
+.menu-dish-image {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-base);
+  object-fit: cover;
+  background-color: var(--color-gray-300);
+  flex-shrink: 0;
+}
+
+.menu-dish-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.menu-dish-name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.menu-dish-quantity {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-600);
+}
+
+/* ===== MODAL ESPECÍFICO ===== */
+
+.modal-large {
+  max-width: 800px;
+}
+
+/* Filtro de Pratos */
+.dishes-filter {
+  margin-bottom: var(--spacing-4);
+}
+
+/* Seleção de Pratos */
+.dishes-selection {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid var(--color-gray-300);
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-2);
+  background-color: var(--color-gray-50);
+}
+
+.dishes-selection::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dishes-selection::-webkit-scrollbar-track {
+  background: var(--color-gray-200);
+  border-radius: var(--border-radius-full);
+}
+
+.dishes-selection::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400);
+  border-radius: var(--border-radius-full);
+}
+
+.dishes-selection::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-500);
+}
+
+/* Checkbox Item */
+.dish-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.dish-checkbox-item:hover {
+  background-color: var(--color-gray-50);
+  border-color: var(--color-primary);
+}
+
+.dish-checkbox-item.selected {
+  background-color: var(--color-primary-lighter);
+  border-color: var(--color-primary);
+}
+
+.dish-checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.dish-checkbox-image {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--border-radius-base);
+  object-fit: cover;
+  background-color: var(--color-gray-300);
+  flex-shrink: 0;
+}
+
+.dish-checkbox-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.dish-checkbox-name {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-gray-900);
+  margin-bottom: 4px;
+}
+
+.dish-checkbox-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-600);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.dish-checkbox-quantity {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Pratos Selecionados */
+.selected-dishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4);
+  background-color: var(--color-gray-50);
+  border-radius: var(--border-radius-base);
+  border: 1px solid var(--color-gray-200);
+  min-height: 60px;
+}
+
+.selected-dish-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--border-radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.selected-dish-badge button {
+  background: none;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--border-radius-full);
+  transition: background-color var(--transition-base);
+}
+
+.selected-dish-badge button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.selected-dish-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Contador de selecionados */
+#selectedCount {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+@media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .page-header-actions {
+    width: 100%;
+  }
+
+  .page-header-actions .btn {
+    width: 100%;
+  }
+
+  .menu-card-header {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .menu-card-actions {
+    width: 100%;
+  }
+
+  .menu-btn {
+    flex: 1;
+  }
+
+  .menu-dishes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-large {
+    margin: var(--spacing-2);
+  }
+
+  .dishes-selection {
+    max-height: 300px;
+  }
+
+  .menu-card-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-card {
+    padding: var(--spacing-4);
+  }
+
+  .menu-card-name {
+    font-size: var(--font-size-xl);
+  }
+
+  .dish-checkbox-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dish-checkbox-image {
+    width: 100%;
+    height: 120px;
+  }
+}
+
+/* ===== ANIMAÇÕES ===== */
+
+.menu-card.removing {
+  animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* ===== LOADING STATE ===== */
+
+.menus-list.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ===== EMPTY STATES ===== */
+
+.dishes-selection:empty::before {
+  content: "Nenhum prato disponível";
+  display: block;
+  text-align: center;
+  padding: var(--spacing-8);
+  color: var(--color-gray-500);
+  font-size: var(--font-size-sm);
+}

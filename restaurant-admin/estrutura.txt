@@ -1,0 +1,39 @@
+restaurant-admin/
+├── index.html (página de login)
+├── pages/
+│   ├── dashboard.html
+│   ├── dishes.html (gestão de pratos)
+│   ├── menus.html (gestão de cardápios)
+│   ├── queues.html (gestão de filas)
+│   ├── profile.html (perfil do admin)
+│   └── access.html (gestão de acessos)
+├── css/
+│   ├── reset.css (normalização)
+│   ├── variables.css (cores, fontes, espaçamentos)
+│   ├── global.css (estilos globais)
+│   ├── components.css (botões, cards, modais, tabelas)
+│   ├── sidebar.css (navegação lateral)
+│   └── pages/
+│       ├── login.css
+│       ├── dashboard.css
+│       ├── dishes.css
+│       ├── menus.css
+│       ├── queues.css
+│       ├── profile.css
+│       └── access.css
+├── js/
+│   ├── utils/
+│   │   ├── storage.js (manipulação localStorage)
+│   │   ├── validation.js (validações de formulário)
+│   │   └── auth.js (verificação de sessão)
+│   └── pages/
+│       ├── login.js
+│       ├── dashboard.js
+│       ├── dishes.js
+│       ├── menus.js
+│       ├── queues.js
+│       ├── profile.js
+│       └── access.js
+└── assets/
+    ├── icons/ (ícones SVG)
+    └── images/

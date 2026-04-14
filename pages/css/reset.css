@@ -1,0 +1,92 @@
+/* ==========================================================================
+   RESET CSS - Normalização de estilos entre navegadores
+   ========================================================================== */
+
+/* Box sizing border-box para todos os elementos */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Configurações base do documento */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Remover estilos de lista */
+ul, ol {
+  list-style: none;
+}
+
+/* Links sem decoração padrão */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Imagens responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Botões e inputs com herança de fonte */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  outline: none;
+}
+
+/* Remover aparência padrão de botões */
+button {
+  background: none;
+  cursor: pointer;
+}
+
+/* Tabelas */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+/* Formulários */
+input, textarea, select {
+  width: 100%;
+}
+
+/* Remover spinners de input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Melhorar acessibilidade de elementos focáveis */
+:focus-visible {
+  outline: 2px solid #1351B4;
+  outline-offset: 2px;
+}
+
+/* Suavizar transições globalmente */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}

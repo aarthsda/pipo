@@ -1,0 +1,132 @@
+/* ==========================================================================
+   VARIÁVEIS CSS - Design Tokens do Sistema Governamental
+   Baseado no Design System do Governo Federal Brasileiro
+   ========================================================================== */
+
+:root {
+  /* ===== CORES PRIMÁRIAS ===== */
+  --color-primary: #1351B4;           /* Azul Governo Federal */
+  --color-primary-dark: #071D41;      /* Azul Escuro */
+  --color-primary-light: #155BCB;     /* Azul Claro */
+  --color-primary-lighter: #E8F1FC;   /* Azul Muito Claro */
+
+  /* ===== CORES SECUNDÁRIAS ===== */
+  --color-secondary: #0C326F;         /* Azul Secundário */
+
+  /* ===== CORES DE FEEDBACK ===== */
+  --color-success: #168821;           /* Verde - Sucesso */
+  --color-success-light: #E6F5E8;     /* Verde Claro */
+  --color-warning: #FFCD07;           /* Amarelo - Atenção */
+  --color-warning-light: #FFF8DC;     /* Amarelo Claro */
+  --color-error: #E52207;             /* Vermelho - Erro */
+  --color-error-light: #FDECEA;       /* Vermelho Claro */
+  --color-info: #155BCB;              /* Azul - Informação */
+  --color-info-light: #E8F1FC;        /* Azul Info Claro */
+
+  /* ===== CORES NEUTRAS ===== */
+  --color-white: #FFFFFF;
+  --color-gray-50: #F8F8F8;           /* Fundo claro */
+  --color-gray-100: #F5F5F5;
+  --color-gray-200: #E5E5E5;
+  --color-gray-300: #CCCCCC;
+  --color-gray-400: #999999;
+  --color-gray-500: #888888;
+  --color-gray-600: #666666;
+  --color-gray-700: #555555;
+  --color-gray-800: #333333;          /* Texto principal */
+  --color-gray-900: #1C1C1C;
+  --color-black: #000000;
+
+  /* ===== TIPOGRAFIA ===== */
+  --font-primary: 'Rawline', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-secondary: 'Raleway', 'Lato', sans-serif;
+
+  /* Tamanhos de Fonte */
+  --font-size-xs: 0.75rem;      /* 12px */
+  --font-size-sm: 0.875rem;     /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-lg: 1.125rem;     /* 18px */
+  --font-size-xl: 1.25rem;      /* 20px */
+  --font-size-2xl: 1.5rem;      /* 24px */
+  --font-size-3xl: 1.875rem;    /* 30px */
+  --font-size-4xl: 2rem;        /* 32px */
+
+  /* Pesos de Fonte */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Altura de Linha */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* ===== ESPAÇAMENTO ===== */
+  --spacing-1: 0.25rem;   /* 4px */
+  --spacing-2: 0.5rem;    /* 8px */
+  --spacing-3: 0.75rem;   /* 12px */
+  --spacing-4: 1rem;      /* 16px */
+  --spacing-5: 1.25rem;   /* 20px */
+  --spacing-6: 1.5rem;    /* 24px */
+  --spacing-8: 2rem;      /* 32px */
+  --spacing-10: 2.5rem;   /* 40px */
+  --spacing-12: 3rem;     /* 48px */
+  --spacing-16: 4rem;     /* 64px */
+  --spacing-20: 5rem;     /* 80px */
+
+  /* ===== BORDAS ===== */
+  --border-radius-sm: 2px;
+  --border-radius-base: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+  --border-radius-full: 9999px;
+
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
+
+  /* ===== SOMBRAS ===== */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-base: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.25);
+
+  /* ===== TRANSIÇÕES ===== */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* ===== Z-INDEX ===== */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-tooltip: 600;
+
+  /* ===== LARGURAS MÁXIMAS ===== */
+  --max-width-xs: 320px;
+  --max-width-sm: 480px;
+  --max-width-md: 768px;
+  --max-width-lg: 1024px;
+  --max-width-xl: 1280px;
+  --max-width-2xl: 1536px;
+
+  /* ===== SIDEBAR ===== */
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 80px;
+
+  /* ===== HEADER ===== */
+  --header-height: 64px;
+}
+
+/* ===== DARK MODE (opcional para implementação futura) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Aqui podem ser adicionadas variáveis para modo escuro */
+  }
+}

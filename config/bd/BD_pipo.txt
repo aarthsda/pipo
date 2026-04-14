@@ -1,0 +1,139 @@
+-- Criação do banco
+CREATE DATABASE IF NOT EXISTS `pipo` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `pipo`;
+
+create table upload (
+    id_upload int(20) PRIMARY KEY AUTO_INCREMENT,
+    nome_upload varchar(255) not null,
+    path_upload varchar(255) not null,
+    tipo_upload varchar(30) not null,
+    data_upload date
+);
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `prato`
+-- --------------------------------------------------------
+DROP TABLE IF EXISTS `prato`;
+CREATE TABLE `prato` (
+  `id_prato` int(11) NOT NULL AUTO_INCREMENT,
+  `nome_prato` varchar(255) NOT NULL,
+  `descricao_prato` text DEFAULT NULL,
+  `quantidade_disponivel_prato` int(11) NOT NULL,
+  `data_prato` date NOT NULL,
+  `foto_prato` int(10),
+  PRIMARY KEY (`id_prato`),
+  FOREIGN KEY (`foto_prato`) REFERENCES  `upload` (`id_upload`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `admin`
+-- --------------------------------------------------------
+CREATE TABLE `admin` (
+  `id_admin` int(4) NOT NULL AUTO_INCREMENT,
+  `codigo_admin` varchar(10) NOT NULL UNIQUE,
+  `nome_admin` varchar(40) NOT NULL,
+  `email_admin` varchar(255) NOT NULL UNIQUE,
+  `senha_admin` varchar(360) NOT NULL,
+  PRIMARY KEY (`id_admin`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `cardapio`
+-- --------------------------------------------------------
+CREATE TABLE `cardapio` (
+  `id_cardapio` int(10) NOT NULL AUTO_INCREMENT,
+  `nome_cardapio` varchar(30) NOT NULL,
+  `prato_A_cardapio` int(10),
+  `prato_B_cardapio` int(10),
+  PRIMARY KEY (`id_cardapio`),
+  FOREIGN KEY (`prato_A_cardapio`) REFERENCES `prato` (`id_prato`),
+  FOREIGN KEY (`prato_B_cardapio`) REFERENCES `prato` (`id_prato`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `fila`
+-- --------------------------------------------------------
+CREATE TABLE `fila` (
+  `id_fila` int(10) NOT NULL AUTO_INCREMENT,
+  `data_fila` date NOT NULL,
+  `capacidade_maxima_fila` int(10) not null,
+  `status_fila` enum('ativa', 'inativa') NOT NULL,
+  `reservas_em_fila` int(10) not null,
+  `cardapio_fila` int(10) NOT NULL,
+  PRIMARY KEY (`id_fila`),
+  FOREIGN KEY (`cardapio_fila`) REFERENCES `cardapio` (`id_cardapio`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `grupo`
+-- --------------------------------------------------------
+CREATE TABLE `grupo` (
+  `id_grupo` int(4) NOT NULL AUTO_INCREMENT,
+  `codigo_grupo` varchar(20) NOT NULL UNIQUE,
+  `dono_grupo` int(10) default null,
+  PRIMARY KEY (`id_grupo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `usuario`
+-- --------------------------------------------------------
+CREATE TABLE `usuario` (
+  `id_usuario` int(4) NOT NULL AUTO_INCREMENT,
+  `nome_usuario` varchar(40) NOT NULL,
+  `email_usuario` varchar(40) NOT NULL UNIQUE,
+  `senha_usuario` varchar(360) NOT NULL,
+  `matricula_usuario` varchar(19) NOT NULL,
+  `categoria_usuario` varchar(20) NOT NULL,
+  `grupo_usuario` int(4) DEFAULT NULL,
+  PRIMARY KEY (`id_usuario`),
+  FOREIGN KEY (`grupo_usuario`) REFERENCES `grupo` (`id_grupo`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+ALTER TABLE `grupo`
+ADD CONSTRAINT `fk_grupo_dono`
+FOREIGN KEY (`dono_grupo`)
+REFERENCES `usuario` (`id_usuario`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+-- Estrutura da tabela `reserva`
+-- --------------------------------------------------------
+CREATE TABLE `reserva` (
+  `id_reserva` int(10) NOT NULL AUTO_INCREMENT,
+  `data_reserva` date NOT NULL,
+  `tipo_reserva` enum('comum','prioritario','reserva') NOT NULL,
+  `status_reserva` enum('ativa','cancelada','invalida','concluida') NOT NULL,
+  `prato_prioritario_reserva` int(10),
+  `id_grupo_reserva` int(4) DEFAULT NULL,
+  `id_fila_reserva` int(10) DEFAULT NULL,
+  `posicao_reserva` int(10) NOT NULL,
+  PRIMARY KEY (`id_reserva`),
+  FOREIGN KEY (`prato_prioritario_reserva`) REFERENCES `prato` (`id_prato`),
+  FOREIGN KEY (`id_grupo_reserva`) REFERENCES `grupo` (`id_grupo`),
+  FOREIGN KEY (`id_fila_reserva`) REFERENCES `fila` (`id_fila`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+-- TRIGGERS
+-- --------------------------------------------------------
+
+DELIMITER //
+
+create TRIGGER tgr_usuario_after_insert AFTER INSERT
+on usuario
+for each ROW
+begin
+	UPDATE grupo SET dono_grupo = new.id_usuario WHERE id_grupo = new.grupo_usuario;
+end//
+
+create TRIGGER tgr_usuario_after_update AFTER UPDATE
+on usuario
+for each ROW
+begin
+    IF NEW.grupo_usuario <> OLD.grupo_usuario THEN
+        DELETE FROM grupo WHERE dono_grupo = OLD.id_usuario AND id_grupo = old.grupo_usuario;
+    END IF;
+end//
+
+DELIMITER ;
+
+INSERT INTO admin (codigo_admin, nome_admin, email_admin, senha_admin) VALUES ('2025307960', 'Julio Cesar de Souza Freitas', 'juliocesar.souzaafreitas@gmail.com', '$2y$10$LpWFGVFTEwlBNIqdbG5QuuJw1f7KUKAzmYLVdLni3nbKBMSUTlM4e');

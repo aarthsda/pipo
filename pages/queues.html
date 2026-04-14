@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gestão de Filas - Sistema de Restaurante">
+  <title>Gestão de Filas - Sistema de Restaurante</title>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sidebar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/pages/queues.css">
+</head>
+<body>
+
+  <div class="main-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">
+          <div class="sidebar-logo-icon">
+            <img src="../assets/icons/logo-pipo.svg" alt="Sistema Pipo" />
+          </div>
+          <div class="sidebar-logo-text">
+            <h2 class="sidebar-logo-title">Sistema Pipo</h2>
+            <p class="sidebar-logo-subtitle">Administração</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="sidebar-menu">
+          <li class="sidebar-menu-item">
+            <a href="dashboard.html" class="sidebar-menu-link">
+              <span class="sidebar-menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="7" height="9" x="3" y="3" rx="1"/>
+                  <rect width="7" height="5" x="14" y="3" rx="1"/>
+                  <rect width="7" height="9" x="14" y="12" rx="1"/>
+                  <rect width="7" height="5" x="3" y="16" rx="1"/>
+                </svg>
+              </span>
+              <span class="sidebar-menu-text">Dashboard</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="dishes.html" class="sidebar-menu-link">
+              <span class="sidebar-menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                  <path d="M7 2v20"/>
+                  <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+                </svg>
+              </span>
+              <span class="sidebar-menu-text">Pratos</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="menus.html" class="sidebar-menu-link">
+              <span class="sidebar-menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" x2="8" y1="13" y2="13"/>
+                  <line x1="16" x2="8" y1="17" y2="17"/>
+                </svg>
+              </span>
+              <span class="sidebar-menu-text">Cardápios</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="queues.html" class="sidebar-menu-link active">
+              <span class="sidebar-menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </span>
+              <span class="sidebar-menu-text">Filas</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="access.html" class="sidebar-menu-link">
+              <span class="sidebar-menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </span>
+              <span class="sidebar-menu-text">Acessos</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="profile.html" class="sidebar-menu-link">
+              <span class="sidebar-menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </span>
+              <span class="sidebar-menu-text">Perfil</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <div class="sidebar-user-avatar" id="userAvatar">A</div>
+          <div class="sidebar-user-info">
+            <p class="sidebar-user-name" id="userName">Administrador</p>
+            <p class="sidebar-user-role">Administrador</p>
+          </div>
+        </div>
+        <button class="sidebar-logout" id="logoutBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" x2="9" y1="12" y2="12"/>
+          </svg>
+          <span>Sair</span>
+        </button>
+      </div>
+    </aside>
+
+    <button class="sidebar-toggle" id="sidebarToggle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="4" x2="20" y1="12" y2="12"/>
+        <line x1="4" x2="20" y1="6" y2="6"/>
+        <line x1="4" x2="20" y1="18" y2="18"/>
+      </svg>
+    </button>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Conteúdo Principal -->
+    <main class="main-content">
+
+      <!-- Header -->
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Gestão de Filas</h1>
+          <p class="page-subtitle">Agende e acompanhe filas em tempo real</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-primary" id="openModalBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" x2="12" y1="5" y2="19"/>
+              <line x1="5" x2="19" y1="12" y2="12"/>
+            </svg>
+            <span>Nova Fila</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Filtros e Tabs -->
+      <section class="filters-section">
+        <div class="tabs">
+          <div class="tabs-list">
+            <button class="tabs-item active" data-status="all">Todas</button>
+            <button class="tabs-item" data-status="scheduled">Agendadas</button>
+            <button class="tabs-item" data-status="active">Em Andamento</button>
+            <button class="tabs-item" data-status="finished">Finalizadas</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Lista de Filas -->
+      <section class="queues-section">
+        <div class="queues-list" id="queuesList">
+          <!-- As filas serão inseridas aqui -->
+        </div>
+
+        <!-- Estado Vazio -->
+        <div class="empty-state hidden" id="emptyState">
+          <div class="empty-state-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3 class="empty-state-title">Nenhuma fila cadastrada</h3>
+          <p class="empty-state-text">Crie sua primeira fila de atendimento</p>
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+  <!-- Modal de Cadastro/Edição -->
+  <div class="modal-overlay hidden" id="modalOverlay">
+    <div class="modal" id="queueModal">
+      
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">Nova Fila</h2>
+        <button class="modal-close" id="closeModalBtn" aria-label="Fechar modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" x2="6" y1="6" y2="18"/>
+            <line x1="6" x2="18" y1="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <form id="queueForm" class="modal-body" novalidate>
+        
+        <!-- Liberação de Ingresso na Fila -->
+        <div class="form-section">
+          <h4 class="form-section-title">📝 Liberação de Ingresso na Fila</h4>
+          <p class="form-section-help">Define quando os usuários poderão entrar na fila</p>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="entryDateInput" class="form-label form-label-required">Data de Liberação</label>
+              <input 
+                type="date" 
+                id="entryDateInput" 
+                name="entryDateInput" 
+                class="form-input"
+                required
+              >
+              <span id="queueEntryDateError" class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="entryTimeInput" class="form-label form-label-required">Hora de Liberação</label>
+              <input 
+                type="time" 
+                id="entryTimeInput" 
+                name="entryTimeInput" 
+                class="form-input"
+                required
+              >
+              <span id="queueEntryTimeError" class="form-error"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- Liberação de Atendimento -->
+        <div class="form-section">
+          <h4 class="form-section-title">🎫 Liberação de Atendimento</h4>
+          <p class="form-section-help">Define quando o atendimento começará (fila andará)</p>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="serviceDateInput" class="form-label form-label-required">Data de Atendimento</label>
+              <input 
+                type="date" 
+                id="serviceDateInput" 
+                name="serviceDateInput" 
+                class="form-input"
+                required
+              >
+              <span id="queueServiceDateError" class="form-error"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="serviceTimeInput" class="form-label form-label-required">Hora de Atendimento</label>
+              <input 
+                type="time" 
+                id="serviceTimeInput" 
+                name="serviceTimeInput" 
+                class="form-input"
+                required
+              >
+              <span id="queueServiceTimeError" class="form-error"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-divider"></div>
+
+        <!-- Configurações da Fila -->
+        <div class="form-section">
+          <h4 class="form-section-title">⚙️ Configurações da Fila</h4>
+          
+          <div class="form-group">
+            <label for="menuId" class="form-label form-label-required">Cardápio</label>
+            <select 
+              id="menuId" 
+              name="menuId" 
+              class="form-select"
+              required
+            >
+              <option value="">Selecione um cardápio</option>
+            </select>
+            <span id="menuIdError" class="form-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="totalCapacity" class="form-label form-label-required">Capacidade Total de Pessoas</label>
+            <input 
+              type="number" 
+              id="totalCapacity" 
+              name="totalCapacity" 
+              class="form-input"
+              placeholder="Ex: 100"
+              required
+              min="1"
+              max="9999"
+            >
+            <span class="form-help">Número máximo de pessoas que podem ser atendidas</span>
+            <span id="totalCapacityError" class="form-error"></span>
+          </div>
+        </div>
+
+      </form>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancelBtn">Cancelar</button>
+        <button type="submit" form="queueForm" class="btn btn-primary" id="submitBtn">
+          <span id="submitBtnText">Cadastrar Fila</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Modal de Gerenciamento de Fila -->
+  <div class="modal-overlay hidden" id="manageModalOverlay">
+    <div class="modal modal-large" id="manageModal">
+      
+      <div class="modal-header">
+        <h2 class="modal-title">Gerenciar Fila</h2>
+        <button class="modal-close" id="closeManageModalBtn" aria-label="Fechar modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" x2="6" y1="6" y2="18"/>
+            <line x1="6" x2="18" y1="6" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body" id="manageModalBody">
+        <!-- Conteúdo será preenchido dinamicamente -->
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="system-footer">
+    <div class="footer-container">
+  
+      <div class="footer-brand">
+        <span class="footer-system-name">Sistema de Gestão | PIPO</span>
+        <span class="footer-copy">© 2026 · Todos os direitos reservados</span>
+      </div>
+  
+      <nav class="footer-nav">
+        <a href="dashboard.html" class="footer-link">Dashboard</a>
+        <a href="menus.html" class="footer-link">Pratos</a>
+        <a href="menus.html" class="footer-link">Cardápios</a>
+        <a href="queues.html" class="footer-link">Filas</a>
+        <a href="access.html" class="footer-link">Acessos</a>
+        <a href="profile.html" class="footer-link">Perfil</a>
+      </nav>
+  
+      <div class="footer-meta">
+        <span class="footer-version">Versão 1.0.0</span>
+      </div>
+  
+    </div>
+  </footer>
+
+
+  <!-- JavaScript -->
+  <script src="../js/utils/storage.js"></script>
+  <script src="../js/utils/validation.js"></script>
+  <script src="../js/utils/auth.js"></script>
+  <script src="../js/pages/queues.js"></script>
+
+</body>
+</html>
