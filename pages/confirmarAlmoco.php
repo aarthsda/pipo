@@ -1,7 +1,6 @@
 <?php
     setcookie("user_type", 'guest', time() + 3600, "/");
     setcookie("user_id", '', time() + 3600, "/");
-    setcookie("user_password", '', time() + 3600, "/");
 
     require_once __DIR__ . "/../controllers/!allCtrl.php";
     require_once __DIR__ . "/../views/!allView.php";

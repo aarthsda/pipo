@@ -1,21 +1,15 @@
 <?php
-    if (empty($_COOKIE) || $_COOKIE['user_type'] != 'usuario' || $_COOKIE['user_id'] != $_GET['idTo']) {
+    require_once __DIR__ . "/../config/auth.php";
+    $usuarioId = requireAuth('usuario');
+
+    if ($usuarioId !== (int) ($_GET['idTo'] ?? 0)) {
         header("Location: hub.php?msg=acessoproibido");
         exit();
     }
 
     require_once __DIR__ . "/../views/usuarioView.php";
 
-    $usuario = new usuarioView(['id_usuario' => $_COOKIE['user_id']]);
-
-    if (!$usuario->verifyPassword($_COOKIE['user_password'])) {
-        setcookie("user_type", 'guest', time() + 3600, "/");
-        setcookie("user_id", '', time() + 3600, "/");
-        setcookie("user_password", '', time() + 3600, "/");
-
-        header("Location: hub.php");
-        exit();
-    }
+    $usuario = new usuarioView(['id_usuario' => $usuarioId]);
 
     require_once __DIR__ . "/../views/grupoView.php";
     require_once __DIR__ . "/../controllers/grupoCtrl.php";

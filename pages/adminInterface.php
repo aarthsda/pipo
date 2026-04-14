@@ -3,32 +3,17 @@
 // DASHBOARD.PHP - VERIFICAÇÃO E AUTENTICAÇÃO
 // ============================================
 
-// Verificar se o usuário está autenticado
-if (empty($_COOKIE) || $_COOKIE['user_type'] != 'admin') {
-    header("Location: hub.php?msg=acessoproibido");
-    exit();
-}
+require_once __DIR__ . "/../config/auth.php";
+$adminId = requireAuth('admin');
 
 require_once __DIR__ . "/../views/adminView.php";
 
 // Buscar dados do admin logado
-$admin = new adminView(['id_admin' => $_COOKIE['user_id']]);
-
-// Verificar se a senha do cookie ainda é válida
-if (!$admin->verifyPassword($_COOKIE['user_password'])) {
-    setcookie("user_type", 'guest', time() + 3600, "/");
-    setcookie("user_id", '', time() + 3600, "/");
-    setcookie("user_password", '', time() + 3600, "/");
-
-    header("Location: hub.php");
-    exit();
-}
+$admin = new adminView(['id_admin' => $adminId]);
 
 // Processar logout
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-    setcookie("user_type", 'guest', time() + 3600, "/");
-    setcookie("user_id", '', time() + 3600, "/");
-    setcookie("user_password", '', time() + 3600, "/");
+    logoutUser();
 
     header("Location: hub.php?msg=logout");
     exit();

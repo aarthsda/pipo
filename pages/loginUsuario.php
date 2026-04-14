@@ -1,6 +1,7 @@
 <?php
     require_once __DIR__ . "/../views/usuarioView.php";
     require_once __DIR__ . "/../config/phpmail.php";
+    require_once __DIR__ . "/../config/auth.php";
 
     $alertMessage = '';
     $alertType = '';
@@ -15,11 +16,7 @@
         
         if (!empty($usuario->getAtributtes())) {
             if ($usuario->verifyPassword($_POST['senha_usuario'])) {
-                $time = time() + (10 * 365 * 24 * 60 * 60);
-                
-                setcookie("user_type", 'usuario', $time, "/");
-                setcookie("user_id", $usuario->get('id_usuario'), $time, "/");
-                setcookie("user_password", $_POST['senha_usuario'], $time, "/");
+                loginUser('usuario', (int) $usuario->get('id_usuario'));
                 
                 header("Location: usuarioInterface.php");
 

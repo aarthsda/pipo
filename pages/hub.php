@@ -1,13 +1,11 @@
 <?php
-    if (!empty($_GET['msg'])) {
-      if ($_GET['msg'] == 'logout') {
-        setcookie("user_type", 'guest', time() + 3600, "/");
-        setcookie("user_id", '', time() + 3600, "/");
-        setcookie("user_password", '', time() + 3600, "/");
-      }
+    require_once __DIR__ . "/../config/auth.php";
+    if (!empty($_GET['msg']) && $_GET['msg'] == 'logout') {
+      logoutUser();
     }
-    if (isset($_COOKIE['user_type'])) {
-        switch ($_COOKIE['user_type']) {
+
+    if (!empty($_SESSION['auth']['type'])) {
+        switch ($_SESSION['auth']['type']) {
             case 'usuario':
                 header("Location: usuarioInterface.php");
                 break;
@@ -15,9 +13,6 @@
                 header("Location: adminInterface.php");
                 break;
         }
-    }
-    else {
-        setcookie("user_type", 'guest', time() + 3600, "/");
     }
 
     require_once __DIR__ . "/../views/filaView.php";
