@@ -1,0 +1,26 @@
+# Node dependencies
+node_modules/
+_Reconhecimento/node_modules/
+_Reconhecimento/backend/node_modules/
+_Reconhecimento/frontend/node_modules/
+
+# PHP/vendor temp
+vendor/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.*
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime uploads/cache
+uploads/tmp/
+*.tmp

@@ -1,41 +1,28 @@
 <?php
   // ========== VALIDAÇÃO DE SESSÃO ==========
-  if (empty($_COOKIE) || $_COOKIE['user_type'] == 'guest') {
+  require_once __DIR__ . "/../config/auth.php";
+
+  $auth = $_SESSION['auth'] ?? null;
+  if (!$auth || empty($auth['type']) || empty($auth['id'])) {
     header("Location: hub.php?msg=acessoproibido");
     exit();
   }
 
-  if ($_COOKIE['user_type'] == 'admin') {
+  if ($auth['type'] === 'admin') {
     $id = $_GET['id'];
     $submitValue = 'Voltar à lista de Usuários';
     require_once __DIR__ . "/../views/adminView.php";
-  
-    $admin = new adminView(['id_admin' => $_COOKIE['user_id']]);
-  
-    if (!$admin->verifyPassword($_COOKIE['user_password'])) {
-      setcookie("user_type", 'guest', time() + 3600, "/");
-      setcookie("user_id", '', time() + 3600, "/");
-      setcookie("user_password", '', time() + 3600, "/");
-  
-      header("Location: hub.php");
-      exit();
-    }
+    $admin = new adminView(['id_admin' => (int) $auth['id']]);
   }
-  else if ($_COOKIE['user_type'] == 'usuario') {
-    $id = $_COOKIE['user_id'];
+  else if ($auth['type'] === 'usuario') {
+    $id = (int) $auth['id'];
     $submitValue = 'Voltar ao Hub';
     require_once __DIR__ . "/../views/usuarioView.php";
-  
-    $usuario = new usuarioView(['id_usuario' => $_COOKIE['user_id']]);
-  
-    if (!$usuario->verifyPassword($_COOKIE['user_password'])) {
-      setcookie("user_type", 'guest', time() + 3600, "/");
-      setcookie("user_id", '', time() + 3600, "/");
-      setcookie("user_password", '', time() + 3600, "/");
-  
-      header("Location: hub.php");
-      exit();
-    }
+    $usuario = new usuarioView(['id_usuario' => (int) $auth['id']]);
+  }
+  else {
+    header("Location: hub.php?msg=acessoproibido");
+    exit();
   }
 
   // ========== CARREGAR DADOS DO USUÁRIO ==========

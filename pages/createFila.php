@@ -1,21 +1,9 @@
 <?php
-  if (empty($_COOKIE) || $_COOKIE['user_type'] != 'admin') {
-    header("Location: hub.php?msg=acessoproibido");
-    exit();
-  }
+  require_once __DIR__ . "/../config/auth.php";
+  $adminId = requireAuth('admin');
 
   require_once __DIR__ . "/../views/adminView.php";
-
-  $admin = new adminView(['id_admin' => $_COOKIE['user_id']]);
-
-  if (!$admin->verifyPassword($_COOKIE['user_password'])) {
-    setcookie("user_type", 'guest', time() + 3600, "/");
-    setcookie("user_id", '', time() + 3600, "/");
-    setcookie("user_password", '', time() + 3600, "/");
-
-    header("Location: hub.php");
-    exit();
-  }
+  $admin = new adminView(['id_admin' => $adminId]);
   
   date_default_timezone_set('America/Rio_Branco');
 ?>

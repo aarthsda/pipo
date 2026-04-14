@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../views/adminView.php";
 require_once __DIR__ . "/../config/phpmail.php";
+    require_once __DIR__ . "/../config/auth.php";
 
 $loginError = '';
 $loginSuccess = false;
@@ -23,11 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['email']) && !empty($
         // Verificar senha
         if ($admin->verifyPassword($senha)) {
             // Configurar cookies de sessão
-            $time = time() + (10 * 365 * 24 * 60 * 60);
-            
-            setcookie("user_type", 'admin', $time, "/");
-            setcookie("user_id", $admin->get('id_admin'), $time, "/");
-            setcookie("user_password", $senha, $time, "/");
+            loginUser('admin', (int) $admin->get('id_admin'));
 
             // Enviar email de alerta (opcional - comentado)
             
